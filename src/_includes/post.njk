@@ -1,0 +1,4 @@
+---
+layout: base.njk
+---
+<section class="page-heading"><div class="container"><a class="back-link" href="{{ '/journal/' | url }}"><span aria-hidden="true">←</span> Journal</a><div class="detail-label"><span class="pill">{{ category }}</span>{% if example %}<span class="example-label">Example post</span>{% endif %}</div><h1>{{ title }}</h1><p>{{ description }}</p><div class="post-meta">{{ author }} <span aria-hidden="true">·</span> <time datetime="{{ page.date | iso }}">{{ page.date | dateLabel }}</time></div></div></section><article class="container prose page-body">{{ content | safe }}</article>

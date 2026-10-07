@@ -1,0 +1,8 @@
+<div class="people-grid">
+{% for person in people %}
+<article class="person-card">
+  <img class="person-photo" src="{{ (person.image or '/assets/portrait-placeholder.svg') | url }}" alt="{{ person.imageAlt or person.name }}" width="300" height="300" loading="lazy">
+  <div class="person-content"><span class="eyebrow">{{ person.role }}</span><h3>{{ person.name }}</h3>{% if person.position %}<p class="person-position">{{ person.position }}</p>{% endif %}<p>{{ person.description }}</p><div class="profile-links">{% for link in person.links %}<a href="{{ link.url }}" rel="external">{{ link.label }} <span aria-hidden="true">↗</span></a>{% endfor %}</div></div>
+</article>
+{% endfor %}
+</div>

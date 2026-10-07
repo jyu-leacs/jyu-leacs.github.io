@@ -1,0 +1,6 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>LEACS journal</title><id>{{ '/' | url | absolute }}</id><link href="{{ '/feed.xml' | url | absolute }}" rel="self"/><link href="{{ '/journal/' | url | absolute }}"/><updated>{% if collections.posts.length %}{{ collections.posts[0].date | iso }}{% else %}2026-01-01T00:00:00.000Z{% endif %}</updated>{% for post in collections.posts %}<entry><title>{{ post.data.title }}</title><id>{{ post.url | url | absolute }}</id><link href="{{ post.url | url | absolute }}"/><updated>{{ post.date | iso }}</updated><author><name>{{ post.data.author or site.name }}</name></author><summary>{{ post.data.description }}</summary></entry>{% endfor %}</feed>

@@ -1,0 +1,19 @@
+---
+layout: base.njk
+title: Start a conversation
+description: Contact the LEACS seminar organizers through Microsoft Forms or email to suggest a talk, share an idea, or ask about attending.
+permalink: /contact/
+---
+<section class="page-heading"><div class="container"><span class="eyebrow">Get in touch</span><h1>Every idea starts with a conversation.</h1><p>Suggest a speaker, share your research, or help shape what comes next.</p></div></section>
+<section class="container contact-grid page-body">
+  <div class="prose"><h2>Bring your perspective.</h2><p>We welcome proposals at the intersection of cognitive science, human–computer interaction, and related fields.</p><h3>Propose a seminar</h3><p>Use the contact form below or send us an email with your topic, intended audience, and preferred timing. A short abstract is a great starting point.</p><h3>Questions about attending?</h3><p>Participation details will be published on each talk page as they are confirmed. Contact us if you have a question or need more information.</p></div>
+  <aside class="contact-panel"><span class="eyebrow">Contact LEACS</span><h2>Send us an email.</h2>{% if site.email %}<p>For talk proposals, collaborations, and questions about the seminars, write to:</p><p><a class="contact-email" href="mailto:{{ site.email }}">{{ site.email }}</a></p><a class="button" href="mailto:{{ site.email }}">Write an email <span aria-hidden="true">↗</span></a><p class="email-note">The link opens your email app. You can also copy the address into your preferred email service.</p>{% else %}<p>The organizers’ contact address will be published here before the series launches.</p>{% endif %}</aside>
+</section>
+{% if site.contactFormUrl %}
+<section class="container microsoft-contact" aria-labelledby="contact-form-heading">
+  <div class="section-heading"><div><span class="eyebrow">Send a message</span><h2 id="contact-form-heading">Contact form.</h2></div><a class="text-link" href="{{ site.contactFormUrl }}" rel="external">Open form on Microsoft Forms <span aria-hidden="true">↗</span></a></div>
+  <p class="microsoft-form-note">This form is hosted by Microsoft Forms. Your response is collected through Microsoft’s service. <a href="{{ '/accessibility/' | url }}">Privacy information</a></p>
+  <iframe class="microsoft-form-frame" title="LEACS contact form — Microsoft Forms" src="{{ site.contactFormUrl }}&amp;embed=true" width="640" height="780" loading="lazy" allowfullscreen></iframe>
+  <p class="microsoft-form-note">If the form does not load, <a href="{{ site.contactFormUrl }}" rel="external">open it directly</a>{% if site.email %} or email <a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}.</p>
+</section>
+{% endif %}

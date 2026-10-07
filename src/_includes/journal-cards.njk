@@ -1,0 +1,14 @@
+{% for post in posts %}
+<article class="journal-card">
+  <div class="journal-art journal-art-{{ loop.index % 2 }}" aria-hidden="true">
+    {% if loop.index % 2 %}<svg viewBox="0 0 120 120"><g class="stim">{% for row in range(0, 5) %}{% for col in range(0, 5) %}{% if not (row == 1 and col == 3) %}<rect x="{{ 14 + col * 22 }}" y="{{ 14 + row * 22 }}" width="9" height="9" rx="2" transform="rotate({{ ((row * 5 + col) * 37) % 90 }} {{ 18.5 + col * 22 }} {{ 18.5 + row * 22 }})"/>{% endif %}{% endfor %}{% endfor %}</g><circle class="target" cx="84.5" cy="40.5" r="6"/><circle class="target-ring" cx="84.5" cy="40.5" r="13"/></svg>
+    {% else %}<svg viewBox="0 0 120 120"><g class="rings"><circle cx="60" cy="60" r="44"/><circle cx="60" cy="60" r="32"/><circle cx="60" cy="60" r="20"/></g><path class="cross" d="M60 52v16M52 60h16"/><circle class="target" cx="88" cy="38" r="5"/></svg>{% endif %}
+  </div>
+  <div class="journal-body">
+    <span class="eyebrow">{{ post.data.category }}{% if post.data.example %} · Example post{% endif %}</span>
+    {% if headingLevel == 2 %}<h2>{% else %}<h3>{% endif %}<a href="{{ post.url | url }}">{{ post.data.title }}</a>{% if headingLevel == 2 %}</h2>{% else %}</h3>{% endif %}
+    <p>{{ post.data.description }}</p>
+    <time datetime="{{ post.date | iso }}">{{ post.date | dateLabel }}</time>
+  </div>
+</article>
+{% endfor %}

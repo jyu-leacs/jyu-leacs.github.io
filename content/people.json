@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Aaron Khodami, PhD",
+    "role": "Seminar manager",
+    "position": "Postdoctoral Researcher · Cognitive Science",
+    "image": "/content/images/aaron-khodami.jpg",
+    "imageAlt": "Aaron Khodami",
+    "description": "Aaron studies vision, visual attention, eye tracking, and cognitive behaviour at the University of Jyväskylä. He works with the Drive-in-lab group and holds a PhD from the University of Padua.",
+    "links": [
+      {
+        "label": "University profile",
+        "url": "https://www.jyu.fi/en/people/aaron-khodami"
+      }
+    ]
+  },
+  {
+    "name": "António Correia",
+    "role": "University of Jyväskylä",
+    "position": "Postdoctoral Researcher · Cognitive Science",
+    "image": "/content/images/antonio-correia.jpg",
+    "imageAlt": "António Correia",
+    "description": "António is a postdoctoral researcher in the Faculty of Information Technology at the University of Jyväskylä. His publications explore human–computer interaction, collaborative technologies, and artificial intelligence.",
+    "links": [
+      {
+        "label": "University profile",
+        "url": "https://www.jyu.fi/en/people/antonio-correia"
+      }
+    ]
+  },
+  {
+    "name": "Laura Mononen",
+    "role": "University of Jyväskylä",
+    "position": "University Teacher · Cognitive Science",
+    "image": "/content/images/laura-mononen.jpg",
+    "imageAlt": "Laura Mononen",
+    "description": "Laura is a university teacher in the Faculty of Information Technology at the University of Jyväskylä. Her research explores systems thinking, adult cognitive development, and human–technology interaction design.",
+    "links": [
+      {
+        "label": "University profile",
+        "url": "https://www.jyu.fi/en/people/laura-mononen"
+      }
+    ]
+  },
+  {
+    "name": "Tommi Kärkkäinen",
+    "role": "University of Jyväskylä",
+    "position": "Professor · Faculty of Information Technology",
+    "image": "/content/images/tommi-karkkainen.jpg",
+    "imageAlt": "Tommi Kärkkäinen",
+    "description": "Tommi is a professor at the University of Jyväskylä. His research develops ways to process and use large, sparse, heterogeneous, and noisy data in collaboration with partners across different fields.",
+    "links": [
+      {
+        "label": "University profile",
+        "url": "https://www.jyu.fi/en/people/tommi-karkkainen"
+      }
+    ]
+  }
+]

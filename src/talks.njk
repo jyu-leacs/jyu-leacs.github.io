@@ -1,0 +1,19 @@
+---
+layout: base.njk
+title: Talks & conversations
+description: Browse the LEACS seminar programme — upcoming and past talks on cognitive science, human–computer interaction, and research methods, with abstracts and speakers.
+permalink: /talks/
+---
+<section class="page-heading"><div class="container"><span class="eyebrow">The programme</span><h1>Talks &amp; conversations.</h1><p>Fresh perspectives. Open questions. A little food for thought.</p></div></section>
+<section class="container listing section">
+  {% if site.demo %}<p class="demo-notice">Illustrative example talks are labelled individually; their dates and speakers are placeholders.</p>{% endif %}
+  <div class="filters" hidden data-filters>
+    <div class="search-field"><label for="search">Search talks</label><input id="search" type="search" placeholder="Title, speaker, or idea…" autocomplete="off"></div>
+    <div><label for="topic">Discipline</label><select id="topic"><option value="all">All disciplines</option>{% set topics = [] %}{% for talk in collections.talks %}{% if talk.data.topic not in topics %}{% set topics = (topics.push(talk.data.topic), topics) %}<option>{{ talk.data.topic }}</option>{% endif %}{% endfor %}</select></div>
+    <div><label for="status">When</label><select id="status"><option value="all">All talks</option><option value="upcoming">Upcoming</option><option value="past">Past</option></select></div>
+    <button class="reset-button" type="button" data-reset>Reset</button>
+  </div>
+  <p class="result-count" role="status" aria-live="polite" data-count>{{ collections.talks.length }} talks</p>
+  <div class="talk-grid">{% set talks = collections.talks %}{% include 'cards.njk' %}</div>
+  <p class="empty-state" data-empty hidden>No talks match your search. Try a different word or reset the filters.</p>
+</section>

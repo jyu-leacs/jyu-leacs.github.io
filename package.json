@@ -1,0 +1,17 @@
+{
+  "name": "leacs-seminars",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node node_modules/@11ty/eleventy/cmd.cjs --serve",
+    "build": "node node_modules/@11ty/eleventy/cmd.cjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "node --test tests/site.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6",
+    "@playwright/test": "1.63.0"
+  }
+}

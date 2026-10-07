@@ -1,0 +1,8 @@
+---
+layout: base.njk
+title: The journal
+description: Notes, reflections, and reading from the LEACS seminar series on cognitive science and human–computer interaction.
+permalink: /journal/
+---
+<section class="page-heading"><div class="container"><span class="eyebrow">Notes from the intersection</span><h1>Keep the ideas moving.</h1><p>Reflections, reading notes, and conversations that continue beyond the seminar.</p></div></section>
+<section class="container section"><div class="journal-grid">{% set posts = collections.posts %}{% set headingLevel = 2 %}{% include 'journal-cards.njk' %}</div></section>

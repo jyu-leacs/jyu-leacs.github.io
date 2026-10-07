@@ -1,0 +1,20 @@
+{% for talk in talks %}
+{% set isUpcoming = talk in collections.upcoming %}
+<article class="talk-card{% if talk.data.example %} is-example{% endif %}" data-talk data-topic="{{ talk.data.topic }}" data-status="{% if isUpcoming %}upcoming{% else %}past{% endif %}">
+  <a class="talk-cover{% if not talk.data.coverImage %} talk-cover-pattern{% endif %}" href="{{ talk.url | url }}" tabindex="-1" aria-hidden="true">
+    {% if talk.data.coverImage %}<img class="cover-fit-{{ talk.data.coverFit or 'cover' }}" src="{{ talk.data.coverImage | url }}" alt="" width="600" height="340" loading="lazy" decoding="async">
+    {% else %}<svg viewBox="0 0 300 170" preserveAspectRatio="xMidYMid slice"><polyline points="40,120 100,60 150,100 215,45 260,110"/><circle cx="40" cy="120" r="7"/><circle cx="100" cy="60" r="12"/><circle cx="150" cy="100" r="6"/><circle class="hot" cx="215" cy="45" r="15"/><circle cx="260" cy="110" r="9"/></svg>{% endif %}
+    {% if talk.data.starts %}<span class="date-chip"><b>{{ talk.data.starts | day }}</b><span>{{ talk.data.starts | month }}</span></span>
+    {% elif talk.data.plannedMonth %}<span class="date-chip"><b>{{ (talk.data.plannedMonth + '-15T12:00:00Z') | month }}</b><span>TBA</span></span>{% endif %}
+  </a>
+  <div class="talk-body">
+    <div class="card-top"><span class="pill">{{ talk.data.topic }}</span>{% if talk.data.example %}<span class="example-label">Example talk</span>{% elif isUpcoming %}<span class="live-label"><span class="live-dot" aria-hidden="true"></span>Upcoming</span>{% else %}<span class="example-label">Past talk</span>{% endif %}</div>
+    <div class="talk-date">{% if talk.data.starts %}<time datetime="{{ talk.data.starts | iso }}">{{ talk.data.starts | dateLabel }}</time><span>{{ talk.data.starts | timeLabel }}</span>{% else %}<span>{% if talk.data.plannedMonth %}{{ talk.data.plannedMonth | monthLabel }}{% else %}Date to be announced{% endif %}</span><span>Date &amp; time to be announced</span>{% endif %}</div>
+    <h3><a href="{{ talk.url | url }}">{{ talk.data.title }}</a></h3>
+    <p>{{ talk.data.description }}</p>
+    {% if talk.data.venue %}<p class="talk-venue"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15s5-4.6 5-8.5A5 5 0 0 0 3 6.5C3 10.4 8 15 8 15Z"/><circle cx="8" cy="6.5" r="1.8"/></svg>{{ talk.data.venue }}</p>{% endif %}
+    <div class="speaker"><img class="speaker-photo" src="{{ (talk.data.speakerPhoto or '/assets/portrait-placeholder.svg') | url }}" alt="{% if talk.data.speakerPhoto %}{{ talk.data.speakerPhotoAlt or talk.data.speaker }}{% endif %}" width="72" height="72" loading="lazy" decoding="async"><div><strong>{{ talk.data.speaker }}</strong><span>{{ talk.data.affiliation }}</span></div></div>
+    {% if talk.data.registration and not talk.data.example %}<a class="button card-registration" href="{% if talk.data.registrationEmbed %}{{ talk.url | url }}#registration{% else %}{{ talk.data.registration }}{% endif %}">Register for the workshop <span aria-hidden="true">→</span></a>{% endif %}
+  </div>
+</article>
+{% endfor %}
