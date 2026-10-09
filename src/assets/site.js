@@ -46,6 +46,64 @@ if (filters) {
   document.querySelector('[data-reset]').addEventListener('click', () => { search.value = ''; topic.value = status.value = 'all'; update(); search.focus(); });
 }
 
+const heroSlider = document.querySelector('[data-hero-slider]');
+if (heroSlider) {
+  const slides = [...heroSlider.querySelectorAll('[data-hero-slide]')];
+  const dots = [...heroSlider.querySelectorAll('[data-hero-dot]')];
+  const chrome = heroSlider.querySelector('[data-hero-chrome]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let index = Math.max(0, slides.findIndex(slide => slide.classList.contains('is-active')));
+  let timer;
+
+  const show = next => {
+    index = (next + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      const active = i === index;
+      slide.classList.toggle('is-active', active);
+      slide.setAttribute('aria-hidden', String(!active));
+      for (const focusable of slide.querySelectorAll('a, button')) focusable.tabIndex = active ? 0 : -1;
+    });
+    dots.forEach((dot, i) => {
+      dot.setAttribute('aria-selected', String(i === index));
+      dot.tabIndex = i === index ? 0 : -1;
+    });
+  };
+
+  const restart = () => {
+    window.clearInterval(timer);
+    if (reduceMotion) return;
+    timer = window.setInterval(() => show(index + 1), 7000);
+  };
+
+  dots.forEach(dot => dot.addEventListener('click', () => { show(Number(dot.dataset.heroDot)); restart(); }));
+  heroSlider.querySelector('[data-hero-prev]')?.addEventListener('click', () => { show(index - 1); restart(); });
+  heroSlider.querySelector('[data-hero-next]')?.addEventListener('click', () => { show(index + 1); restart(); });
+  heroSlider.addEventListener('keydown', event => {
+    if (event.key === 'ArrowRight') { show(index + 1); restart(); }
+    else if (event.key === 'ArrowLeft') { show(index - 1); restart(); }
+  });
+  heroSlider.addEventListener('mouseenter', () => window.clearInterval(timer));
+  heroSlider.addEventListener('mouseleave', restart);
+  heroSlider.addEventListener('focusin', () => window.clearInterval(timer));
+  heroSlider.addEventListener('focusout', restart);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) window.clearInterval(timer); else restart(); });
+
+  let touchStartX = null;
+  heroSlider.addEventListener('pointerdown', event => { if (event.pointerType === 'touch') touchStartX = event.clientX; });
+  heroSlider.addEventListener('pointerup', event => {
+    if (touchStartX === null) return;
+    const delta = event.clientX - touchStartX;
+    touchStartX = null;
+    if (Math.abs(delta) < 40) return;
+    show(delta < 0 ? index + 1 : index - 1);
+    restart();
+  });
+
+  if (chrome) chrome.hidden = false;
+  show(index);
+  restart();
+}
+
 for (const link of document.querySelectorAll('[data-meeting-opens]')) {
   const opensAt = Date.parse(link.dataset.meetingOpens);
   if (!Number.isFinite(opensAt)) continue;

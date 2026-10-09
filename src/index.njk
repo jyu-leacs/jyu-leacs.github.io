@@ -8,30 +8,63 @@ hero:
   line2: Shared possibilities.
   text: Exploring how we think, how we interact, and how technology shapes our world. A seminar series for conversations across disciplines.
 ---
-<section class="hero">
+{% set psychopyMatches = [] %}
+{% for talk in collections.talks %}{% if talk.fileSlug == "psychopy-in-finland" %}{% set void = psychopyMatches.push(talk) %}{% endif %}{% endfor %}
+{% set psychopyTalk = psychopyMatches[0] %}
+<section class="hero" data-hero-slider role="region" aria-roledescription="carousel" aria-label="Featured highlights">
   <div class="hero-grid-bg" aria-hidden="true"></div>
-  <div class="container hero-inner">
-    <div class="hero-copy">
-      <p class="hero-eyebrow"><span class="live-dot" aria-hidden="true"></span>{{ hero.eyebrow }}</p>
-      <h1>{{ hero.line1 }}<br><em>{{ hero.line2 }}</em></h1>
-      <p class="hero-lead">{{ hero.text }}</p>
-      <div class="hero-actions"><a class="button button-bright" href="{{ '/talks/' | url }}">Discover the talks <span aria-hidden="true">→</span></a><a class="button button-ghost" href="{{ '/about/' | url }}">Get to know LEACS</a></div>
-      <ul class="hero-topics" aria-label="Topics">
-        <li>Cognitive science</li><li>Human–computer interaction</li><li>Research methods</li>
-      </ul>
+  <div class="hero-slides">
+    <div class="hero-slide is-active" id="hero-slide-1" data-hero-slide role="group" aria-roledescription="slide" aria-label="1 of 3: Curious minds">
+      <img class="hero-slide-media" src="{{ '/content/images/cognition-interface.webp' | url }}" alt="An illustrated blue human head with neural connections facing a glass interface above a calm lake" width="1400" height="933" fetchpriority="high" decoding="async">
+      <div class="hero-slide-scrim" aria-hidden="true"></div>
+      <div class="container hero-slide-inner">
+        <div class="hero-copy">
+          <p class="hero-eyebrow"><span class="live-dot" aria-hidden="true"></span>{{ hero.eyebrow }}</p>
+          <h1 class="hero-heading">{{ hero.line1 }}<br><em>{{ hero.line2 }}</em></h1>
+          <p class="hero-lead">{{ hero.text }}</p>
+          <div class="hero-actions"><a class="button button-bright" href="{{ '/talks/' | url }}">Discover the talks <span aria-hidden="true">→</span></a><a class="button button-ghost" href="{{ '/about/' | url }}">Get to know LEACS</a></div>
+          <ul class="hero-topics" aria-label="Topics">
+            <li>Cognitive science</li><li>Human–computer interaction</li><li>Research methods</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <figure class="hero-media">
-      <img src="{{ '/content/images/cognition-interface.webp' | url }}" alt="An illustrated blue human head with neural connections facing a glass interface above a calm lake" width="1400" height="933" fetchpriority="high" decoding="async">
-      <svg class="scanpath" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-        <polyline class="scan-line" pathLength="1" points="150,120 275,205 300,330 470,230 520,140 430,350"/>
-        <g class="fixations">
-          <circle cx="150" cy="120" r="16" style="--i:0"/><circle cx="275" cy="205" r="24" style="--i:1"/><circle cx="300" cy="330" r="12" style="--i:2"/>
-          <circle cx="470" cy="230" r="30" style="--i:3"/><circle cx="520" cy="140" r="14" style="--i:4"/><circle cx="430" cy="350" r="19" style="--i:5"/>
-        </g>
-      </svg>
-      <figcaption class="gaze-tag"><span class="mono">fixation 04 · 312 ms</span></figcaption>
-      <div class="aoi-corner" aria-hidden="true"></div>
-    </figure>
+    <div class="hero-slide" id="hero-slide-2" data-hero-slide role="group" aria-roledescription="slide" aria-label="2 of 3: On campus, by the lake" aria-hidden="true">
+      <img class="hero-slide-media" src="{{ '/content/images/jyucampus.jpg' | url }}" alt="Aerial view of the University of Jyväskylä campus beside Lake Jyväsjärvi" width="1920" height="1440" loading="lazy" decoding="async">
+      <div class="hero-slide-scrim" aria-hidden="true"></div>
+      <div class="container hero-slide-inner">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">Faculty of Information Technology · University of Jyväskylä</p>
+          <p class="hero-heading">On campus,<br><em>by the lake.</em></p>
+          <p class="hero-lead">LEACS meets on the Jyväskylä campus, where Cognitive Science and Human–computer interaction research share a home on the shores of Lake Jyväsjärvi.</p>
+          <div class="hero-actions"><a class="button button-bright" href="{{ '/about/' | url }}">About LEACS <span aria-hidden="true">→</span></a><a class="button button-ghost" href="{{ site.organization.departmentUrl }}" rel="external">Visit the department ↗</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide" id="hero-slide-3" data-hero-slide role="group" aria-roledescription="slide" aria-label="3 of 3: Get PsychoPy to Finland" aria-hidden="true">
+      <div class="hero-slide-media hero-slide-media-flat" aria-hidden="true"></div>
+      <div class="hero-slide-scrim" aria-hidden="true"></div>
+      <div class="container hero-slide-inner">
+        <div class="hero-copy">
+          <p class="hero-eyebrow"><span class="live-dot" aria-hidden="true"></span>Upcoming workshop{% if psychopyTalk.data.starts %} · <time datetime="{{ psychopyTalk.data.starts | iso }}">{{ psychopyTalk.data.starts | dateLabel('medium') }}</time>{% endif %}</p>
+          <p class="hero-heading">Get PsychoPy<br><em>to Finland.</em></p>
+          <p class="hero-lead">{% if psychopyTalk %}{{ psychopyTalk.data.speaker }}, {{ psychopyTalk.data.affiliation }}, on building behavioural experiments{% else %}Building behavioural experiments{% endif %} — code components, hardware integration, and online studies with PsychoPy and Pavlovia.</p>
+          <div class="hero-actions"><a class="button button-bright" href="{{ (psychopyTalk.url if psychopyTalk else '/talks/psychopy-in-finland/') | url }}">Reserve your spot <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="hero-slide-badge-wrap">
+          <div class="hero-slide-badge"><img src="{{ '/content/images/psychopy.png' | url }}" alt="PsychoPy" width="1080" height="350" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-chrome" data-hero-chrome hidden>
+      <button type="button" class="hero-arrow hero-arrow-prev" data-hero-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="hero-arrow hero-arrow-next" data-hero-next aria-label="Next slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="hero-dots" data-hero-dots role="tablist" aria-label="Choose slide">
+        <button type="button" role="tab" aria-selected="true" aria-controls="hero-slide-1" tabindex="0" data-hero-dot="0" aria-label="Show slide 1: Curious minds"></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="hero-slide-2" tabindex="-1" data-hero-dot="1" aria-label="Show slide 2: On campus, by the lake"></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="hero-slide-3" tabindex="-1" data-hero-dot="2" aria-label="Show slide 3: Get PsychoPy to Finland"></button>
+      </div>
+    </div>
   </div>
   {% set nextTalk = collections.upcoming[0] %}
   {% if nextTalk %}
